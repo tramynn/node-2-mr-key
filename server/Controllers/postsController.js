@@ -1,11 +1,19 @@
-let posts = ["test"];
+let posts = [];
 let id = 0;
 
 const getPosts = (req, res) => {
+  const id = +req.query.id;
+
+  if (id) {
+    const post = posts.filter(post => post.id == id);
+    return res.status(200).json(post);
+  }
+
   res.status(200).json(posts);
 };
 
 const addPost = (req, res) => {
+  // console.log(req);
   const { title, content } = req.body;
   posts.push({ id, title, content });
   id++;
